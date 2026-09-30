@@ -30,6 +30,6 @@ int main(void) {
     }
 
     glfwTerminate();
-    
+    //test
     return 0;
 }
