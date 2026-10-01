@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 void closeWindow();
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void _framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 
 
@@ -30,7 +30,7 @@ GLFWwindow* createWindow(int sizeH, int sizeV, char *name)
 
     glViewport(0, 0, sizeH, sizeV);
     
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(window, _framebuffer_size_callback);
     
 
     return window;
@@ -42,7 +42,7 @@ void updateWindow(GLFWwindow* window)
     glfwPollEvents();
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void _framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }

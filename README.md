@@ -1,4 +1,4 @@
 minecraft, written in c
 
 TODO LIST:
-empty
+add render as .h and move all render logic from main.c
