@@ -2,20 +2,10 @@
 #include "../lib/GLFW/glfw3.h"
 #include <stdio.h>
 #include <string.h>
+#include "window.h"
 
 int main(void) {
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", NULL, NULL);
-    glfwMakeContextCurrent(window);
-
-    
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        return 1;
-    }
+    GLFWwindow* window = createWindow(800, 600, "eshkere");
 
     while (!glfwWindowShouldClose(window))
     {
@@ -29,7 +19,7 @@ int main(void) {
         glfwPollEvents();
     }
 
-    glfwTerminate();
+    closeWindow();
     
     return 0;
 }
