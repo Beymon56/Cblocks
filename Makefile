@@ -5,7 +5,7 @@ LDFLAGS = -Llib/GLFW
 LDLIBS  = -lglfw3dll -lopengl32 -lgdi32
 
 TARGET  = program
-SRC = src/main.c src/glad.c src/window.h
+SRC = src/main.c src/glad.c src/window.h src/input.h
 
 all: $(TARGET)
 
