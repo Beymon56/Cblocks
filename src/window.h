@@ -2,7 +2,9 @@
 #include "../lib/GLFW/glfw3.h"
 #include <stdio.h>
 
-//GLFWwindow createWindow(int sizeH, int sizeV, char *name);
+void closeWindow();
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
 
 
 GLFWwindow* createWindow(int sizeH, int sizeV, char *name)
@@ -15,12 +17,36 @@ GLFWwindow* createWindow(int sizeH, int sizeV, char *name)
     GLFWwindow* window = glfwCreateWindow(sizeH, sizeV, name, NULL, NULL);
     glfwMakeContextCurrent(window);
     
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    if (window == NULL)
+    {
+        printf("failed to create window!\n");
+        closeWindow();
+    }
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
         printf("error on load glad!\n");
     }
+
+    glViewport(0, 0, sizeH, sizeV);
     
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    
+
     return window;
 }
+
+void updateWindow(GLFWwindow* window)
+{
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
 
 void closeWindow()
 {
