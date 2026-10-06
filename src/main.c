@@ -14,10 +14,10 @@ int main(void) {
     unsigned int shaderProgramID = createShaderProgram();
 
     float vertices[] = {
-     0.5f,  0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f,
-    -0.5f, -0.5f, 0.0f,
-    -0.5f,  0.5f, 0.0f,
+     0.5f,  0.5f, 0.0f,     1.0f, 0.0f, 0.0f,
+     0.5f, -0.5f, 0.0f,     0.0f, 1.0f, 0.0f,
+    -0.5f, -0.5f, 0.0f,     0.0f, 0.0f, 1.0f,
+    -0.5f,  0.5f, 0.0f,     0.0f, 0.0f, 0.0f,
     };
     unsigned int indices[] = {
         0, 1, 3,
@@ -38,10 +38,14 @@ int main(void) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    //position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    //color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,  6 * sizeof(float), (void*)(3* sizeof(float)));
+    glEnableVertexAttribArray(1);
     
-    
+
 
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); wireframe mode enable, super ahuennaya shtuka
     //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); wireframe mode disable
@@ -50,7 +54,7 @@ int main(void) {
     while (!glfwWindowShouldClose(windowID))
     {
         processInput(windowID);
-
+        
         render(shaderProgramID, VAO);
         
         updateWindow(windowID);

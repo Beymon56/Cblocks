@@ -1,7 +1,10 @@
 #version 330 core
-out vec4 FragColor;
+out vec4 FragColor;  
+in vec3 fColor;
 
+uniform float test1;
+  
 void main()
 {
-    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+    FragColor = vec4(fColor.xyz, 1.0);
 }
