@@ -71,7 +71,6 @@ char* readShaderSourse(const char* soursePath)
         return NULL;
     }
 
-    // Узнаём размер файла
     fseek(file, 0, SEEK_END);
     long size = ftell(file);
     fseek(file, 0, SEEK_SET);
@@ -81,14 +80,12 @@ char* readShaderSourse(const char* soursePath)
         return NULL;
     }
 
-    // Выделяем память (+1 для '\0')
     char* buffer = (char*)malloc(size + 1);
     if (!buffer) {
         fclose(file);
         return NULL;
     }
 
-    // Читаем содержимое
     size_t read = fread(buffer, 1, size, file);
     buffer[read] = '\0';
 
