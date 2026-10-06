@@ -1,20 +1,22 @@
 #include "../lib/GLAD/glad/glad.h"
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
-char* readShaderSourse(const char* soursePath);
-unsigned int shaderProgramID;
+const char* vertexShaderSourse =
+    "#version 330 core\n"
+    "layout (location = 0) in vec3 pos;\n"
+    "void main()\n"
+    "{gl_Position = vec4(pos.x, pos.y, pos.z, 1.0);}";
+
+const char* fragmentShaderSourse =
+    "#version 330 core\n"
+    "out vec4 FragColor\n;"
+    "void main()\n"
+    "{FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);}";
+
+   
 
 unsigned int createShaderProgram()
 {
-    char* buffer;
-    buffer = readShaderSourse("res/shaders/vertex.glsl");
-    const char* vertexShaderSourse = buffer;
-    buffer = readShaderSourse("res/shaders/fragment.glsl");
-    const char* fragmentShaderSourse = buffer;
-    free(buffer);
-    
     unsigned int vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
     unsigned int fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
@@ -41,7 +43,7 @@ unsigned int createShaderProgram()
         printf("error on compilation fragment shader: %s", infoLog);
     }
 
-    shaderProgramID = glCreateProgram();
+    unsigned int shaderProgramID = glCreateProgram();
     glAttachShader(shaderProgramID, vertexShaderID);
     glAttachShader(shaderProgramID, fragmentShaderID);
     glLinkProgram(shaderProgramID);
@@ -57,47 +59,5 @@ unsigned int createShaderProgram()
 
     glDeleteShader(vertexShaderID);
     glDeleteShader(fragmentShaderID);
-
     return shaderProgramID;
-}
-
-
-
-char* readShaderSourse(const char* soursePath)
-{
-    FILE* file = fopen(soursePath, "rb");
-    if (!file) {
-        fprintf(stderr, "error on reading: %s\n", soursePath);
-        return NULL;
-    }
-
-    // Узнаём размер файла
-    fseek(file, 0, SEEK_END);
-    long size = ftell(file);
-    fseek(file, 0, SEEK_SET);
-
-    if (size <= 0) {
-        fclose(file);
-        return NULL;
-    }
-
-    // Выделяем память (+1 для '\0')
-    char* buffer = (char*)malloc(size + 1);
-    if (!buffer) {
-        fclose(file);
-        return NULL;
-    }
-
-    // Читаем содержимое
-    size_t read = fread(buffer, 1, size, file);
-    buffer[read] = '\0';
-
-    fclose(file);
-    return buffer;
-}
-
-void setFloat(const char* name, float value)
-{
-    int location = glGetUniformLocation(shaderProgramID, name);
-    glUniform1f(location, value);
 }
