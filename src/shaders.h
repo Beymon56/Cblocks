@@ -11,7 +11,7 @@ unsigned int createShaderProgram()
 {
     if (wireframeSwitch == 1)
     {
-        //wireframe mode enable, super ahuennaya shtuka (GL_FILL - disable)
+        //wireframe mode enable, super ahuennaya shtuka (GL_FILL - disable) 
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
     }
     char* buffer;
