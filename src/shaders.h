@@ -5,9 +5,15 @@
 
 char* readShaderSourse(const char* soursePath);
 unsigned int shaderProgramID;
+int wireframeSwitch = 0;
 
 unsigned int createShaderProgram()
 {
+    if (wireframeSwitch == 1)
+    {
+        //wireframe mode enable, super ahuennaya shtuka (GL_FILL - disable)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+    }
     char* buffer;
     buffer = readShaderSourse("res/shaders/vertex.glsl");
     const char* vertexShaderSourse = buffer;
@@ -93,8 +99,18 @@ char* readShaderSourse(const char* soursePath)
     return buffer;
 }
 
+
+
 void setFloat(const char* name, float value)
 {
     int location = glGetUniformLocation(shaderProgramID, name);
     glUniform1f(location, value);
 }
+
+
+void setInt(const char* name, int value)
+{
+    int location = glGetUniformLocation(shaderProgramID, name);
+    glUniform1i(location, value);
+}
+

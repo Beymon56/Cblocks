@@ -6,6 +6,7 @@
 #include "input.h"
 #include "render.h"
 #include "shaders.h"
+#include "../lib/CGLM/cglm.h"
 
 
 
@@ -47,8 +48,7 @@ int main(void) {
     
 
 
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); wireframe mode enable, super ahuennaya shtuka
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); wireframe mode disable
+    
     
 
     while (!glfwWindowShouldClose(windowID))
