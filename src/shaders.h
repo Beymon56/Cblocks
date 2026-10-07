@@ -24,7 +24,8 @@ unsigned int createShaderProgram()
     unsigned int vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
     unsigned int fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
-
+    
+    //load vertex shader to openGL
     glShaderSource(vertexShaderID, 1, &vertexShaderSourse, NULL);
     glCompileShader(vertexShaderID);
     int success;
@@ -37,7 +38,7 @@ unsigned int createShaderProgram()
     }
 
 
-
+    //load fragment shader to openGL
     glShaderSource(fragmentShaderID, 1, &fragmentShaderSourse, NULL);
     glCompileShader(fragmentShaderID);
     glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success);
