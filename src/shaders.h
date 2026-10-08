@@ -104,8 +104,7 @@ char* readShaderSourse(const char* soursePath)
 
 void setFloat(const char* name, float value)
 {
-    int location = glGetUniformLocation(shaderProgramID, name);
-    glUniform1f(location, value);
+    glUniform1f(glGetUniformLocation(shaderProgramID, name), value);
 }
 
 
