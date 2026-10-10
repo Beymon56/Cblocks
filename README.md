@@ -1,5 +1,5 @@
 minecraft, written in c
 
-TODO LIST:
-add all cglm uniform calls to shaders.h
-add more comments a to neponyatno nihuya
+TODO LIST:\n
+add all cglm uniform calls to shaders.h\n
+add more comments a to neponyatno nihuya\n
